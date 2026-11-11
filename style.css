@@ -1,3 +1,47 @@
 :root {
+	font-family: "JetBrains Mono";
+	
 	background-image: url("bakcground.png");
+	background-repeat: repeat;
+	background-attachment: fixed;
+	background-position: center;
+
+	/* Sizes */
+	--background-size: 500px;
+}
+
+body {
+	margin-top: 0;
+	padding-top: 0;
+}
+
+div.background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+
+	width: min(50vw, 100vw);
+	min-width: min(500px, 100vw);
+
+	left: 50%;
+	transform: translateX(-50%);
+	
+	background-color: #1a1c2c;
+	align-items: center;
+	justify-content: center;
+
+	border: #29366f;
+	border-width: 4px;
+	border-style: solid;
+	border-top: 0;
+	border-bottom: 0;
+
+	padding: 20px;
+}
+
+h1#specialtitle {
+	color: #b13e53;
+	font-weight: 800;
+	text-align: center;
+	font-size: max(4vw, 30pt);
 }
