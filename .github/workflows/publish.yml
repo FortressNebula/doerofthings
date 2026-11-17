@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: FortressNebula/doerofthings-articles
-          token: ${{ secrets.SRC_TOKEN }}
+          token: ${{ secrets.ARTICLE_KEY }}
           path: posts
 
       - name: Setup just
