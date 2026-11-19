@@ -1,10 +1,10 @@
-import markdown, os, sys
+import markdown, os, sys, shutil, re
 from funky_markdown_stuff import DashAdderExtension
 
-def collect_post_paths(posts_path="posts"):
+def collect_paths(file_ext, posts_path="posts"):
     out = []
     for path in os.listdir(posts_path):
-        if path.endswith(".md"):
+        if path.endswith(file_ext):
             out.append(path)
     return out
 
@@ -23,6 +23,7 @@ def parse_post(post, posts_path="posts"):
 
     return (post.split('.')[0], TITLE, SUBTITLE, DATE, BODY)
 
+
 def stylised_title(title:str):
     title_words = title.lower().split(' ')
     out = "/"
@@ -33,6 +34,7 @@ def stylised_title(title:str):
         out += "</span>"
     out += "/"
     return out
+
 
 def create_post_file(post_data):
     id, title, subtitle, date, body = post_data
@@ -70,6 +72,7 @@ def create_post_index_element(post_data):
 
     return out 
 
+
 def write_post_index(post_index):
     template = ""
     with open("build/index.html", "rt") as file:
@@ -81,6 +84,16 @@ def write_post_index(post_index):
     with open("build/index.html", "wt") as file:
         file.write(out)
 
+
+def move_post_images(post_id):
+    all_pictures = collect_paths(('.png', '.jpeg', '.jpg', '.svg'))
+
+    # copy all relevant picture paths
+    for picture in all_pictures:
+        if re.match("^" + post_id + "_", picture):
+            shutil.copy2(f'posts/{picture}', f'build/posts/{post_id}/')
+
+
 def reset_index_html():
     template = ""
     with open("home_page.html", "rt") as file:
@@ -89,19 +102,23 @@ def reset_index_html():
     with open("build/index.html", "wt") as file:
         file.write(template)
 
+
 def run():
     if len(sys.argv) > 1:
         if sys.argv[1] == "flush":
             reset_index_html()
             return
 
-    paths = collect_post_paths()
+    paths = collect_paths('.md')
     post_index = ""
     for p in paths:
         data = parse_post(p)
         create_post_file(data)
         post_index += create_post_index_element(data)
+        move_post_images(data[0])
+
     write_post_index(post_index)
+
 
 if __name__ == "__main__":
     run()

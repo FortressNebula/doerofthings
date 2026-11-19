@@ -73,6 +73,17 @@ h1#maintitle {
 	font-size: 35pt;
 }
 
+h6 {
+	color: #566c86;
+
+	font-family: 'JetBrains Mono';
+	font-weight: 500;
+	font-size: 12pt;
+	text-align: center;
+
+	letter-spacing: 0%;
+}
+
 a, b, strong {
 	color: #ef7d57;
 	font-weight: 700;
@@ -89,7 +100,7 @@ p.subtitle {
 	letter-spacing: 0%;
 }
 
-p {
+p, ul, ol {
 	color: white;
 	font-family: 'Karla';
 	font-weight: 400;
@@ -99,6 +110,21 @@ p {
 	
 	padding-left: 30pt;
 	padding-right: 30pt;
+}
+
+ul, ol {
+	padding-left: 50pt
+}
+
+li::marker {
+	color: #566c86
+}
+
+img {
+	display: block;
+	margin: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 /* Post menu */
