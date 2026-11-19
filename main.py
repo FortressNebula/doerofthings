@@ -1,4 +1,5 @@
 import markdown, os, sys
+from funky_markdown_stuff import DashAdderExtension
 
 def collect_post_paths(posts_path="posts"):
     out = []
@@ -18,7 +19,7 @@ def parse_post(post, posts_path="posts"):
     SUBTITLE = post_raw_lines[1]
     DATE = post_raw_lines[2]
 
-    BODY = markdown.markdown('\n'.join(post_raw_lines[3:]))
+    BODY = markdown.markdown('\n'.join(post_raw_lines[3:]), extensions=[DashAdderExtension()])
 
     return (post.split('.')[0], TITLE, SUBTITLE, DATE, BODY)
 
